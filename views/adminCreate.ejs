@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/adminCreate.css" rel="stylesheet" />
+  </head>
+  <body>
+    <a href="/admin" class="btn btn-primary">Back</a>
+    <form
+      method="POST"
+      action="/admin/item/new"
+      enctype="multipart/form-data"
+      class="middle"
+    >
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          placeholder="Enter Title"
+          name="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Price</label>
+        <input
+          type="number"
+          class="form-control"
+          id="exampleInputPassword1"
+          placeholder="Price"
+          name="price"
+        />
+        <div class="form-group">
+          <textarea
+            placeholder="description"
+            rows="num"
+            cols="num"
+            name="description"
+          ></textarea>
+        </div>
+      </div>
+      <input type="file" class="form-control" name="img" multiple />
+      <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </form>
+  </body>
+</html>

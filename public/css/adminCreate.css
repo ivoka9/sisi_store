@@ -1,0 +1,13 @@
+.middle {
+  width: 50vw;
+  margin: 0 auto;
+}
+
+textarea {
+  height: 20vh;
+  width: 50vw;
+}
+
+.card {
+  height: 150px;
+}
