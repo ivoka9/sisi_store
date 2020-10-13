@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const showItem = await db.Item.findById(req.params.id);
-  res.render("itemShow", { showItem: showItem });
+  res.json( { showItem: showItem });
 });
 
 module.exports = router;

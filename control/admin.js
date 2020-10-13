@@ -8,8 +8,7 @@ const upload = multer({ dest: "upload" });
 router.get("/", async (req, res) => {
   const allItems = await db.Item.find({});
   const flag = await db.Order.findOne({done:false})
-  console.log('..............................................')
-  console.log(flag==null)
+ 
   res.render("adminMain", { allItems: allItems, flag:flag==null });
 });
 
@@ -19,6 +18,7 @@ router.get("/add", (req, res) => {
 
 router.post("/item/new", upload.array("img"), async (req, res) => {
   const arr = req.files.map((img) => img.filename);
+  res.json(req.files)
   const newItem = {
     name: req.body.name,
     price: req.body.price,
