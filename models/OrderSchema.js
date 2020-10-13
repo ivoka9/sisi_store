@@ -10,8 +10,10 @@ const OrderSchema = new mongoose.Schema(
     ],
     state: String,
     zip: Number,
+    phone: Number,
     street: String,
     nameOfBuyer: String,
+    done: Boolean
   },
   { timestamps: true }
 );

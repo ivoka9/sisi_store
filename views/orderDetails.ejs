@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <p>
+        <p>
+        name :  <%=order.nameOfBuyer %>
+        </p>
+        <p>
+            address : <%=order.street%> ,  <%=order.state%> , <%=order.zip%>
+        </p>
+        <p>
+            phone : <%=order.phone%>
+        </p>
+        <p>
+        Have i send it : <% if (order.done) { %>
+         Yes
+        <% }else{ %>
+         No
+        <% }%>
+        </p>
+        <ul>
+        The Order:
+        <% order.items.forEach(item => { %>
+        <li> <%=item.name%> </li>
+        <% }) %>
+        </ul>
+    </p>
+    <% if (!order.done) { %>
+        <form action="/order/done/<%=order._id%>?_method=PUT" method="post">
+        <button type="submit" class="btn btn-success">Send it</button>
+        </form>
+        <%}%>
+</body>
+</html>

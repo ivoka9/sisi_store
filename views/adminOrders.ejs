@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <ul class="list-group">
+        <% for (let index = orders.length-1; index >= 0 ; index--) { %>
+            <a  href="/admin/order/<%=orders[index]._id%>"class="list-group-item 
+            <% if(!orders[index].done) {%>
+            active
+            <%}%>
+             ">Order Number :<%=index+1%></a>
+
+        <%} %>
+        
+      </ul>
+</body>
+</html>

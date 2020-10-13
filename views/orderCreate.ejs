@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
   </head>
   <body>
     <div class="container mt-5">
-      <form>
+      <form action="/order/<%=id%>" method="post">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputPassword4">First Name</label>
@@ -17,6 +17,7 @@
               class="form-control"
               id="inputPassword4"
               placeholder="First Name"
+              name="first"
             />
           </div>
           <div class="form-group col-md-6">
@@ -26,6 +27,7 @@
               class="form-control"
               id="inputPassword4"
               placeholder="Last Name"
+              name="last"
             />
           </div>
           <div class="form-group col-md-6">
@@ -35,6 +37,7 @@
               class="form-control"
               id="inputPassword4"
               placeholder="(123)-456-7890"
+              name="phone"
             />
           </div>
           <div class="form-group col-md-6">
@@ -44,6 +47,7 @@
               class="form-control"
               id="inputEmail4"
               placeholder="Email"
+              name="email"
             />
           </div>
         </div>
@@ -54,6 +58,7 @@
             class="form-control"
             id="inputAddress"
             placeholder="1234 Main St"
+            name="address"
           />
         </div>
         <div class="form-group">
@@ -63,17 +68,22 @@
             class="form-control"
             id="inputAddress2"
             placeholder="Apartment, studio, or floor"
+            name="address2"
           />
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity" />
+            <input
+              type="text"
+              class="form-control"
+              name="city"
+              id="inputCity"
+            />
           </div>
           <div class="form-group col-md-4">
             <label for="inputState">State</label>
-            <select id="inputState" class="form-control">
-              <option selected>Choose...</option>
+            <select id="inputState" class="form-control" name="state">
               <% Object.keys(states).forEach(state => { %>
               <option><%=states[state]%></option>
               <% }) %>
@@ -81,7 +91,7 @@
           </div>
           <div class="form-group col-md-2">
             <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip" />
+            <input type="text" name="zip" class="form-control" id="inputZip" />
           </div>
         </div>
         <div class="form-group">

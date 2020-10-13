@@ -3,23 +3,14 @@ const router = express.Router();
 const db = require("../models");
 const multer = require("multer");
 const upload = multer({ dest: "upload" });
-/*
- POST ITEMS
 
- PUT 
-
- DEL
-
- VIEW ALL ITEMS
-
- VIEW SINGLE ITEM
-
-
-*/
 
 router.get("/", async (req, res) => {
   const allItems = await db.Item.find({});
-  res.render("adminMain", { allItems: allItems });
+  const flag = await db.Order.findOne({done:false})
+  console.log('..............................................')
+  console.log(flag==null)
+  res.render("adminMain", { allItems: allItems, flag:flag==null });
 });
 
 router.get("/add", (req, res) => {
@@ -53,6 +44,17 @@ router.delete("/item/delete/:id", async (req, res) => {
   await db.Item.findByIdAndDelete(req.params.id);
   res.redirect("/admin");
 });
+
+router.get('/orders', async(req,res)=>{
+  const orders = await db.Order.find({})
+  res.render('adminOrders',{orders:orders})
+})
+
+router.get('/order/:id',async(req,res)=>{
+  const order = await db.Order.findById(req.params.id).populate('items')
+  console.log(order)
+  res.render('orderDetails',{order:order})
+})
 
 router.get("/:id", async (req, res) => {
   const showItem = await db.Item.findById(req.params.id);

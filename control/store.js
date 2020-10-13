@@ -4,7 +4,7 @@ const db = require("../models");
 
 router.get("/", async (req, res) => {
   const allItems = await db.Item.find({});
-  res.render("main", { allItems: allItems });
+  res.json({ allItems: allItems });
 });
 
 router.get("/:id", async (req, res) => {

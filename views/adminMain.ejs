@@ -24,7 +24,16 @@
 
   <body>
     <!-- Navigation -->
-
+    <nav class="navbar navbar-light bg-light fixed-top">
+        <a  href="/admin" class="btn btn-outline-success"  >Main</a>
+        <a href="/admin/orders" class="btn 
+        <% if(flag){ %>
+          btn-success
+        <%}else{ %>
+          btn-danger    
+        <%}%>
+        "> Orders</a>
+    </nav>
     <!-- Page Content -->
     <div class="container">
       <!-- Jumbotron Header -->

@@ -5,22 +5,35 @@ const router = express.Router();
 
 /* POST Order */
 
-router.get("/", (req, res) => {
-  res.render("orderCreate", { states: states });
+router.get("/:id", (req, res) => {
+  res.render("orderCreate", { states: states, id: req.params.id });
 });
 
-router.post("/", async (req, res) => {
-  const item = await db.Item.findById("5f7b6fff75f5f61dc8c71b0c");
-  const order = {
-    state: "MA",
-    zip: 123,
-    street: "ivo str",
-    nameOfBuyer: "ivoka",
-    items: [item],
-  };
-  const newOrder = await db.Order.create(order);
-  console.log(order);
-  res.send("Order created");
+router.post("/:id", async (req, res) => {
+  try {
+    const item = await db.Item.findById(req.params.id);
+    const order = {
+      state: req.body.state,
+      zip: req.body.zip,
+      street: req.body.address + " " + req.body.address2,
+      nameOfBuyer: req.body.first + " " + req.body.last,
+      phone : req.body.phone,
+      items: [item],
+      done: false
+    };
+
+    const newOrder = await db.Order.create(order);
+
+    res.send("Order succesfull");
+  } catch (err) {
+    console.log(err);
+    res.send("not succesfull");
+  }
 });
+
+router.put('/done/:id' ,async(req,res)=>{
+  await db.Order.findByIdAndUpdate(req.params.id,{done:true})
+  res.redirect('/admin/orders')
+})
 
 module.exports = router;
