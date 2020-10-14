@@ -6,7 +6,7 @@ const router = express.Router();
 /* POST Order */
 
 router.get("/:id", (req, res) => {
-  res.render("orderCreate", { states: states, id: req.params.id });
+  res.json({ states: states, id: req.params.id });
 });
 
 router.post("/:id", async (req, res) => {
