@@ -11,6 +11,7 @@ router.get("/:id", (req, res) => {
 
 router.post("/:id", async (req, res) => {
   try {
+    console.log(res.body)
     const item = await db.Item.findById(req.params.id);
     const order = {
       state: req.body.state,
