@@ -2,6 +2,8 @@ const express = require("express");
 const db = require("../models");
 const states = require("../public/scripts/allStates");
 const router = express.Router();
+const multer = require('multer')
+const upload = multer()
 
 /* POST Order */
 
@@ -9,9 +11,8 @@ router.get("/:id", (req, res) => {
   res.json({ states: states, id: req.params.id });
 });
 
-router.post("/:id", async (req, res) => {
+router.post("/:id",upload.none(), async (req, res) => {
   try {
-    console.log(res.body)
     const item = await db.Item.findById(req.params.id);
     const order = {
       state: req.body.state,
@@ -23,12 +24,12 @@ router.post("/:id", async (req, res) => {
       done: false
     };
 
-    const newOrder = await db.Order.create(order);
+   const newOrder = await db.Order.create(order);
 
-    res.send("Order succesfull");
+    res.json({order:true});
   } catch (err) {
     console.log(err);
-    res.send("not succesfull");
+    res.json({order:false});
   }
 });
 
