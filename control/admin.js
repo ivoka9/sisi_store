@@ -42,7 +42,7 @@ router.put("/item/edit/:id", async (req, res) => {
 
 router.delete("/item/delete/:id", async (req, res) => {
   await db.Item.findByIdAndDelete(req.params.id);
-  res.redirect("/admin");
+  res.send('Deleted');
 });
 
 router.get('/orders', async(req,res)=>{
