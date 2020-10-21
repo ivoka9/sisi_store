@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const multer = require("multer");
-const upload = multer({ dest: "upload" });
+const upload = multer();
 
 
 router.get("/", async (req, res) => {
@@ -12,33 +12,23 @@ router.get("/", async (req, res) => {
   res.render("adminMain", { allItems: allItems, flag:flag==null });
 });
 
-router.get("/add", (req, res) => {
-  res.render("adminCreate");
-});
 
-router.post("/item/new", upload.array("img"), async (req, res) => {
-  const arr = req.files.map((img) => img.filename);
-  res.json(req.files)
+router.post("/item/new", upload.none(), async (req, res) => {
+  try{
   const newItem = {
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
-    img: arr,
+    img: req.body.img.split(','),
   };
-  await db.Item.create(newItem);
-  res.redirect("/admin");
+  const created = await db.Item.create(newItem);
+  res.json("Post Crated");
+  }catch(err){
+    console.log(err)
+    res.json('ERR')
+  }
 });
 
-router.put("/item/edit/:id", async (req, res) => {
-  const editItem = {
-    name: "item2",
-    price: 123,
-    img: "NULL",
-  };
-  const id = "5f7b6fff75f5f61dc8c71b0c";
-  await db.Item.findByIdAndUpdate(id, editItem);
-  res.send("item" + id + " changed");
-});
 
 router.delete("/item/delete/:id", async (req, res) => {
   await db.Item.findByIdAndDelete(req.params.id);
@@ -47,13 +37,14 @@ router.delete("/item/delete/:id", async (req, res) => {
 
 router.get('/orders', async(req,res)=>{
   const orders = await db.Order.find({})
-  res.render('adminOrders',{orders:orders})
+  res.json({orders:orders})
 })
 
 router.get('/order/:id',async(req,res)=>{
-  const order = await db.Order.findById(req.params.id).populate('items')
-  console.log(order)
-  res.render('orderDetails',{order:order})
+  const order = await db.Order.findById(req.params.id)
+  .populate('items')
+  .exec()
+  res.json({order:order})
 })
 
 router.get("/:id", async (req, res) => {

@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
   {
-    items: [
+    item: 
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item",
       },
-    ],
+    
     state: String,
     zip: Number,
     phone: Number,

@@ -13,14 +13,13 @@ router.get("/:id", (req, res) => {
 
 router.post("/:id",upload.none(), async (req, res) => {
   try {
-    const item = await db.Item.findById(req.params.id);
     const order = {
       state: req.body.state,
       zip: req.body.zip,
       street: req.body.address + " " + req.body.address2,
       nameOfBuyer: req.body.first + " " + req.body.last,
       phone : req.body.phone,
-      items: [item],
+      item: req.params.id,
       done: false
     };
 
