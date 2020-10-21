@@ -41,9 +41,7 @@ router.get('/orders', async(req,res)=>{
 })
 
 router.get('/order/:id',async(req,res)=>{
-  const order = await db.Order.findById(req.params.id)
-  .populate('items')
-  .exec()
+  const order = await db.Order.findById(req.params.id).populate('items')
   res.json({order:order})
 })
 
