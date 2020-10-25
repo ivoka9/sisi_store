@@ -35,7 +35,7 @@ router.post("/:id",upload.none(), async (req, res) => {
 
 router.put('/done/:id' ,async(req,res)=>{
   await db.Order.findByIdAndUpdate(req.params.id,{done:true})
-  res.redirect('/admin/orders')
+  res.json({done:true})
 })
 
 module.exports = router;
