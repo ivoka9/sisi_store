@@ -3,9 +3,10 @@ const router = express.Router();
 const db = require("../models");
 const multer = require("multer");
 const upload = multer();
+const auth = require('.././customMiddleWere/ipProtection')
 
 
-router.get("/", async (req, res) => {
+router.get("/",   async (req, res) => {
   const allItems = await db.Item.find({});
   const flag = await db.Order.findOne({done:false})
  
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 
-router.post("/item/new", upload.none(), async (req, res) => {
+router.post("/item/new",auth.ipProtection, upload.none(), async (req, res) => {
   try{
   const newItem = {
     name: req.body.name,
@@ -30,7 +31,7 @@ router.post("/item/new", upload.none(), async (req, res) => {
 });
 
 
-router.delete("/item/delete/:id", async (req, res) => {
+router.delete("/item/delete/:id",auth.ipProtection, async (req, res) => {
   await db.Item.findByIdAndDelete(req.params.id);
   res.json({deleted:true});
 });
