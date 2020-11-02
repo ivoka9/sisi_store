@@ -18,6 +18,7 @@ app.use(express.static(__dirname + "/upload"));
 
 app.use("/order", control.order);
 app.use("/admin", control.admin);
+app.use('/user',control.user)
 app.use("/", control.store);
 
 app.listen(PORT, () => {

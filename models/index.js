@@ -14,4 +14,5 @@ mongoose
 module.exports = {
   Item: require("./ItemSchema"),
   Order: require("./OrderSchema"),
+  User: require('./UserSchema')
 };
